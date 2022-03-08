@@ -55,7 +55,7 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-
+const likedPostIDs = [];
 function addPost(content, media, authorImg, name, likes, date, id) {
     const post = document.createElement("div");
     post.classList.add("post");
@@ -101,5 +101,6 @@ for (let index = 0; index < document.querySelectorAll(".like-button").length; in
         this.classList.add("like-button--liked");
         event.preventDefault();
         this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML=parseInt(this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML)+1;
+        likedPostIDs.push(this.getAttribute("data-postid"));
     })
 }
