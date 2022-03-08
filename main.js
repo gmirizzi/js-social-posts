@@ -62,11 +62,13 @@ const likedPostIDs = [];
 function addPost(content, media, authorImg, name, likes, date, id) {
     const post = document.createElement("div");
     post.classList.add("post");
-    post.innerHTML =
-        `<div class="post__header">
-            <div class="post-meta">                    
-                <div class="post-meta__icon">
-                <img class="profile-pic" src="${authorImg}" alt="${name}">                    
+
+    if (authorImg == null) {
+        post.innerHTML =
+            `<div class="post__header">
+        <div class="post-meta">                    
+        <div class="post-meta__icon">
+                    <div class="profile-pic-default"><span>LF</span></div>                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${name}</div>
@@ -79,29 +81,60 @@ function addPost(content, media, authorImg, name, likes, date, id) {
             <img src="${media}" alt="">
         </div>
         <div class="post__footer">
-            <div class="likes js-likes">
+        <div class="likes js-likes">
                 <div class="likes__cta">
                     <a class="like-button  js-like-button" href="#" data-postid="${id}">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
                     Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
-                </div>
+                    </div>
             </div> 
         </div>`;
+    } else {
+        post.innerHTML =
+            `<div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                <img class="profile-pic" src="${authorImg}" alt="${name}">                    
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${name}</div>
+                    <div class="post-meta__time">${date}</div>
+                </div>                    
+            </div>
+            </div>
+            <div class="post__text">${content}</div>
+            <div class="post__image">
+            <img src="${media}" alt="">
+        </div>
+        <div class="post__footer">
+        <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                        </a>
+                        </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
+                    </div>
+                    </div> 
+                    </div>`;
+    }
     document.getElementById("container").append(post);
 }
 
 //ciclo x convertire tutte le date in formato italiano
 for (let index = 0; index < posts.length; index++) {
-    const americanDate=posts[index].created;
-    const aaaa=americanDate.charAt(0)+americanDate.charAt(1)+americanDate.charAt(2)+americanDate.charAt(3);
-    const mm=americanDate.charAt(5)+americanDate.charAt(6);
-    const gg=americanDate.charAt(8)+americanDate.charAt(9);
-    const italianDate=gg+"-"+mm+"-"+aaaa;
-    posts[index].created=italianDate;
+    const americanDate = posts[index].created;
+    const aaaa = americanDate.charAt(0) + americanDate.charAt(1) + americanDate.charAt(2) + americanDate.charAt(3);
+    const mm = americanDate.charAt(5) + americanDate.charAt(6);
+    const gg = americanDate.charAt(8) + americanDate.charAt(9);
+    const italianDate = gg + "-" + mm + "-" + aaaa;
+    posts[index].created = italianDate;
 }
 
 //ciclo con il quale vengono aggiunti i post nell'html, prendendo i dati dall'array
@@ -111,10 +144,10 @@ for (let index = 0; index < posts.length; index++) {
 
 //Aggiunge la funzionalità a tutti i tasti "mi piace"
 for (let index = 0; index < document.querySelectorAll(".like-button").length; index++) {
-    document.querySelectorAll(".like-button")[index].addEventListener('click', function(event) {
+    document.querySelectorAll(".like-button")[index].addEventListener('click', function (event) {
         this.classList.add("like-button--liked");
         event.preventDefault();
-        this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML=parseInt(this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML)+1;
+        this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML = parseInt(this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML) + 1;
         likedPostIDs.push(this.getAttribute("data-postid"));
     })
 }
