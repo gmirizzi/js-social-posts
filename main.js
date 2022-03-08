@@ -59,18 +59,6 @@ const posts = [
 //Array per gli ID dei post piaciuti
 const likedPostIDs = [];
 
-//FUNCTIONS
-//Funzione per convertire la data in formato italiano
-function dateConvertToItalianFormat (originalDate) {
-    const americanDate=originalDate;
-    const aaaa=americanDate.charAt(0)+americanDate.charAt(1)+americanDate.charAt(2)+americanDate.charAt(3);
-    const mm=americanDate.charAt(5)+americanDate.charAt(6);
-    const gg=americanDate.charAt(8)+americanDate.charAt(9);
-    const italianDate=gg+"-"+mm+"-"+aaaa;
-    originalDate=italianDate;
-}
-
-//InnerHTML
 function addPost(content, media, authorImg, name, likes, date, id) {
     const post = document.createElement("div");
     post.classList.add("post");
@@ -108,7 +96,12 @@ function addPost(content, media, authorImg, name, likes, date, id) {
 
 //ciclo x convertire tutte le date in formato italiano
 for (let index = 0; index < posts.length; index++) {
-    dateConvertToItalianFormat (posts[index].created)
+    const americanDate=posts[index].created;
+    const aaaa=americanDate.charAt(0)+americanDate.charAt(1)+americanDate.charAt(2)+americanDate.charAt(3);
+    const mm=americanDate.charAt(5)+americanDate.charAt(6);
+    const gg=americanDate.charAt(8)+americanDate.charAt(9);
+    const italianDate=gg+"-"+mm+"-"+aaaa;
+    posts[index].created=italianDate;
 }
 
 //ciclo con il quale vengono aggiunti i post nell'html, prendendo i dati dall'array
