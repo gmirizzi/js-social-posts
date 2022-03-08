@@ -90,3 +90,8 @@ function addPost(content, media, authorImg, name, likes, date, id) {
         </div>`;
     document.getElementById("container").append(post);
 }
+
+//ciclo con il quale vengono aggiunti i post nell'html, prendendo i dati dall'array
+for (let index = 0; index < posts.length; index++) {
+    addPost(posts[index].content,posts[index].media,posts[index].author.image,posts[index].author.name,posts[index].likes,posts[index].created,posts[index].content,posts[index].id);    
+}
