@@ -138,7 +138,7 @@ for (let index = 0; index < posts.length; index++) {
     const aaaa = americanDate.charAt(0) + americanDate.charAt(1) + americanDate.charAt(2) + americanDate.charAt(3);
     const mm = americanDate.charAt(5) + americanDate.charAt(6);
     const gg = americanDate.charAt(8) + americanDate.charAt(9);
-    const italianDate = gg + "-" + mm + "-" + aaaa;
+    const italianDate = gg + "/" + mm + "/" + aaaa;
     posts[index].created = italianDate;
 }
 
