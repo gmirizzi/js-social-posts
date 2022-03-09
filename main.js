@@ -158,6 +158,8 @@ for (let index = 0; index < document.querySelectorAll(".like-button").length; in
             for(let index in posts){
                 if(this.getAttribute("data-postid")==posts[index].id){
                     posts[index].likes--;
+                    const indexID = likedPostIDs.indexOf(posts[index].id)
+                    likedPostIDs.splice(indexID, 1);
                 }
             }
         } else {
@@ -168,9 +170,7 @@ for (let index = 0; index < document.querySelectorAll(".like-button").length; in
                     posts[index].likes++;
                 }
             }
-            if (!likedPostIDs.includes(this.getAttribute("data-postid"))){
-                likedPostIDs.push(this.getAttribute("data-postid"));
-            }
+            likedPostIDs.push(this.getAttribute("data-postid"));
         }
     })
 }
