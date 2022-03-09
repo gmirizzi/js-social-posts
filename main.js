@@ -153,7 +153,10 @@ for (let index = 0; index < document.querySelectorAll(".like-button").length; in
         } else {
             this.classList.add("like-button--liked");
             this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML = parseInt(this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML) + 1;
-            likedPostIDs.push(this.getAttribute("data-postid"));
+            if (!likedPostIDs.includes(this.getAttribute("data-postid"))){
+                likedPostIDs.push(this.getAttribute("data-postid"));
+            }
         }
+        console.log(likedPostIDs);
     })
 }
