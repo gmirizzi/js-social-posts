@@ -155,9 +155,19 @@ for (let index = 0; index < document.querySelectorAll(".like-button").length; in
         if(Array.from(this.classList).includes("like-button--liked")){
             this.classList.remove("like-button--liked");
             this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML = parseInt(this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML) - 1;
+            for(let index in posts){
+                if(this.getAttribute("data-postid")==posts[index].id){
+                    posts[index].likes--;
+                }
+            }
         } else {
             this.classList.add("like-button--liked");
             this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML = parseInt(this.parentNode.parentNode.querySelector(".js-likes-counter").innerHTML) + 1;
+            for(let index in posts){
+                if(this.getAttribute("data-postid")==posts[index].id){
+                    posts[index].likes++;
+                }
+            }
             if (!likedPostIDs.includes(this.getAttribute("data-postid"))){
                 likedPostIDs.push(this.getAttribute("data-postid"));
             }
