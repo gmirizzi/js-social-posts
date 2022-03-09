@@ -5,7 +5,8 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/300?image=171",
         "author": {
-            "name": "Phil Mangione",
+            "name": "Phil",
+            "surname": "Mangione",
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
@@ -16,7 +17,8 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=112",
         "author": {
-            "name": "Sofia Perlari",
+            "name": "Sofia",
+            "surname": "Perlari",
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
@@ -27,7 +29,8 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=234",
         "author": {
-            "name": "Chiara Passaro",
+            "name": "Chiara", 
+            "surname":"Passaro",
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
@@ -38,7 +41,8 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
-            "name": "Luca Formicola",
+            "name": "Luca",
+            "surname": "Formicola",
             "image": null
         },
         "likes": 56,
@@ -49,7 +53,8 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
-            "name": "Alessandro Sainato",
+            "name": "Alessandro", 
+            "surname": "Sainato",
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
@@ -59,7 +64,7 @@ const posts = [
 //Array per gli ID dei post piaciuti
 const likedPostIDs = [];
 
-function addPost(content, media, authorImg, name, likes, date, id) {
+function addPost(content, media, authorImg, name, inizialeName, surname, inizialeSurname, likes, date, id) {
     const post = document.createElement("div");
     post.classList.add("post");
 
@@ -68,10 +73,10 @@ function addPost(content, media, authorImg, name, likes, date, id) {
             `<div class="post__header">
         <div class="post-meta">                    
         <div class="post-meta__icon">
-                    <div class="profile-pic-default"><span>LF</span></div>                    
+                    <div class="profile-pic-default"><span>${inizialeName}${inizialeSurname}</span></div>                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${name}</div>
+                    <div class="post-meta__author">${name} ${surname}</div>
                     <div class="post-meta__time">${date}</div>
                 </div>                    
             </div>
@@ -98,10 +103,10 @@ function addPost(content, media, authorImg, name, likes, date, id) {
             `<div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                <img class="profile-pic" src="${authorImg}" alt="${name}">                    
+                <img class="profile-pic" src="${authorImg}" alt="${name} ${surname}">                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${name}</div>
+                    <div class="post-meta__author">${name} ${surname}</div>
                     <div class="post-meta__time">${date}</div>
                 </div>                    
             </div>
@@ -139,7 +144,7 @@ for (let index = 0; index < posts.length; index++) {
 
 //ciclo con il quale vengono aggiunti i post nell'html, prendendo i dati dall'array
 for (let index = 0; index < posts.length; index++) {
-    addPost(posts[index].content, posts[index].media, posts[index].author.image, posts[index].author.name, posts[index].likes, posts[index].created, posts[index].id);
+    addPost(posts[index].content, posts[index].media, posts[index].author.image, posts[index].author.name, posts[index].author.name.charAt(0), posts[index].author.surname, posts[index].author.surname.charAt(0), posts[index].likes, posts[index].created, posts[index].id);
 }
 
 //Aggiunge la funzionalità a tutti i tasti "mi piace"
@@ -157,6 +162,5 @@ for (let index = 0; index < document.querySelectorAll(".like-button").length; in
                 likedPostIDs.push(this.getAttribute("data-postid"));
             }
         }
-        console.log(likedPostIDs);
     })
 }
